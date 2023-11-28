@@ -16,7 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+			<header className='py-10 flex justify-center items-center bg-slate-700 text-yellow-500'>HEADER INMOBILIARIA 😆</header>
+				{children}
+			<footer className='py-10 flex justify-center items-center bg-slate-700 text-yellow-500'>HEADER INMOBILIARIA 😆</footer>
+			</body>
     </html>
   )
 }

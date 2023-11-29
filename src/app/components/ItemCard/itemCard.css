@@ -1,0 +1,11 @@
+.house-measures-data {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px dashed
+}
+
+.border-end {
+  border-left: 1px dashed;
+  border-right: 1px dashed;
+  padding: 0 2em;
+}

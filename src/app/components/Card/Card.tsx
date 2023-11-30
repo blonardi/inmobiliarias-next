@@ -1,9 +1,23 @@
-import './card.css'
-import gpsLogo from '../../assets/gps.svg'
+// import './card.css'
 import { ItemCard } from '../ItemCard/ItemCard.jsx'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
-export const Card = ({
+
+interface CardProps {
+  id: string;
+  permalink: string;
+  price: number;
+  title: string;
+  address: string;
+  description: string;
+  dimention: number;
+  type: string;
+  location: string;
+  realEstate: string;
+  houseImage: string;
+}
+
+const Card: React.FC<CardProps> = ({
   id,
   permalink,
   price,
@@ -17,7 +31,7 @@ export const Card = ({
   houseImage
 }) => {
   return (
-    <Link to={`/details/${id}`} className='card-link'>
+    // <Link className='card-link' key={permalink} href={`/house/${permalink}`}>
       <article className='house-card'>
         <div className='house-image'>
           <img className='house-image-src' src={houseImage} alt='' />
@@ -30,16 +44,18 @@ export const Card = ({
             <h2>{title}</h2>
           </header>
           <div className='house-address'>
-            <img src={gpsLogo} alt='' />
+            {/* <img src={gpsLogo} alt='' /> */}
             <div className='house-address-direction'>
               <p>{address}</p>
             </div>
           </div>
         </section>
-        <footer className='house-measures'>
+        {/* <footer className='house-measures'>
           <ItemCard dimention={dimention} type={type} realEstate={realEstate} />
-        </footer>
+        </footer> */}
       </article>
-    </Link>
+    // </Link>
   )
 }
+
+export default Card

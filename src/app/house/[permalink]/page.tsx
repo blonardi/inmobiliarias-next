@@ -17,7 +17,13 @@ export async function generateMetadata({params:{permalink}}: {params: {permalink
 	}
 }
 
-
+export async function generateStaticParams() {
+  const houses = await apiHouses.listhouses();
+ 
+  return houses.map((house) => ({
+    permalink: house.permalink,
+  }));
+}
 
 export default async function Details({params: {permalink} }:{params: { permalink : string} }) {
 	const house = await apiHouses.fetchHouse(permalink)

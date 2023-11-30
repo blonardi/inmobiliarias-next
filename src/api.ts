@@ -1,7 +1,7 @@
 interface House {
   id: string;
 	permalink: string,
-  price: string,
+  price: number,
   title: string;
   date: string,
   address: string;

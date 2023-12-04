@@ -17,7 +17,7 @@ const apiHouses = {
 
 	//si tira error, check {houses:[{}]}
 	listhouses: async(): Promise<House[]> => {
-		const response = await fetch('http://localhost:3001/api/houses')
+		const response = await fetch('http://localhost:3001/api/houses', {cache:'no-store'})
 		const data = await response.json()
 		const houses = data.houses
 		return houses

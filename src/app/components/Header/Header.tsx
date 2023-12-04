@@ -3,32 +3,28 @@
 const Header = () => {
 	return (
 	<header className=" my-8 w-[90%] mx-auto overflow-hidden max-w-screen-xl text-gray-400 bg-header body-font shadow-2xl hover:shadow-lg hover:shadow-emerald-700 rounded-xl transition-all">
-	  <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-	    <a className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+    <nav className="p-6 md:flex md:flex-wrap md:items-center md:justify-between text-base">
+
+			<div className="flex flex-row items-center justify-between">
+	    	<a className="flex title-font font-medium my-auto mx-0 items-center text-white mb-4 md:mb-0">
 	      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-10 h-10 text-white p-2 bg-blue-500 rounded-full" viewBox="0 0 24 24">
 	        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
 	      </svg>
+				{/* <img src="../imgs/kumpel_logo.jpg" alt="Logo Kumpel" /> */}
 	      <span className="ml-3 text-xl">Tailblocks</span>
-	    </a>
-	    <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-	      
+	    	</a>
+			</div>
 
-				<input type="checkbox" id="menu" className="peer hidden"/>
-				<label htmlFor="menu" className="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer text-white hover:text-white peer-checked:bg-close-menu font-bold">X
-				</label>
-				<div className="translate-x-full peer-checked:translate-x-0 transition-transform">
-					<a className="mr-5 hover:text-white">First Link</a>
-		      <a className="mr-5 hover:text-white">Second Link</a>
-		      <a className="mr-5 hover:text-white">Third Link</a>
-		      <a className="mr-5 hover:text-white">Fourth Link</a>
-				</div>
-	    </nav>
-	    <button className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Log in
-	      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
-	        <path d="M5 12h14M12 5l7 7-7 7"></path>
-	      </svg>
-	    </button>
-	  </div>
+			<div className="md:flex md:items-center z-[-1] md:z-auto md:static absolute w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+				<a className="mr-5 hover:text-white">Inicio</a>
+	      <a className="mr-5 hover:text-white">Inmuebles</a>
+	      <a className="mr-5 hover:text-white">Nosotros</a>
+	      <a className="mr-5 hover:text-white">Contacto</a>
+
+				<button className=" py-2 px-2 border border-white rounded-md font-bold text-white">Log In</button>
+			</div>
+	   </nav>
+			
 	</header>
 	)
 }

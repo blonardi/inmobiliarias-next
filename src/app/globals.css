@@ -40,11 +40,6 @@ body {
 	overflow-x: hidden;
 }
 
-main {
-	margin: 48px 0;
-
-}
-
 .title {
 	font-size: var(--fsBig);
 	text-align: center;
@@ -59,4 +54,11 @@ main {
 	width: 100%;
 	max-width: var(--containerMaxWidth);
 	margin: 0 auto;
+}
+
+@layer components {
+	.iconos {
+		background-image: url('../imgs/burger-menu.svg');
+		background-image: url('../imgs/close-menu.svg');
+	}
 }

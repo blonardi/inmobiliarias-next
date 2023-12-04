@@ -17,10 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='container m-auto grid min-h-screen grid-rows-[auto,1fr,auto] px-4'>
-			<header className='py-8 flex justify-center items-center bg-slate-700 text-yellow-500'>HEADER INMOBILIARIA 😆</header>
-			<main className='py-8'>{children}</main>
-			<footer className='py-8 flex justify-center items-center bg-slate-700 text-yellow-500'>FOOTER INMOBILIARIA 😆</footer>
+      <body className='m-auto grid grid-rows-[auto,1fr,auto] min-h-screen bg-background'>
+					<main>{children}</main>
 			</body>
     </html>
   )

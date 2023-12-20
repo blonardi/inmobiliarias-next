@@ -56,9 +56,14 @@ body {
 	margin: 0 auto;
 }
 
+.hero {
+	background-image: url('./assets/imgs/hero-bg.png');
+	object-fit: cover;
+}
+
 @layer components {
 	.iconos {
-		background-image: url('../imgs/burger-menu.svg');
-		background-image: url('../imgs/close-menu.svg');
+		background-image: url('../assets/imgs/burger-menu.svg');
+		background-image: url('../assets/imgs/close-menu.svg');
 	}
 }

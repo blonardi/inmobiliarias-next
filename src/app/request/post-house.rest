@@ -1,0 +1,16 @@
+POST http://localhost:3001/api/houses
+Content-Type: application/json
+
+
+{
+    "price": 3000,
+    "title": "Casa Fea Grande",
+    "address": "Urquiza 123",
+    "description":
+      "Lorem ipsum en la serenidad de esta encantadora casa de campo. Con un hermoso jardín que te invita a la relajación al aire libre, esta residencia ofrece un refugio tranquilo en medio de la naturaleza. Sus detalles rústicos y ambiente acogedor te harán sentir como en casa.",
+		"houseImage" : "https://fincaraiz.com.co/blog/wp-content/uploads/2022/08/casas-modernas-1-1920x1130.jpg",
+    "dimention": 160,
+    "type": "Lote",
+    "location": "Carbo",
+    "realEstate": "Zapata"
+}

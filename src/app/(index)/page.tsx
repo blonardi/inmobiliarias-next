@@ -6,18 +6,16 @@
 
 import apiHouses from "@/api"
 import Card from './components/Card/Card'
-import Image from "next/image"
 import Link from "next/link"
 import SearchBox from "./components/SearchBox"
-import { redirect } from "next/navigation"
 import Hero from "./components/Hero/Hero"
-import Footer from "../components/Footer/Footer"
-import Header from "../components/Header/Header"
-import Filter from "./components/Hero/Filter"
+import Filter from "./components/Filter/Filter"
+import Map from "./components/Maps/Map"
 
-export default async function HomePage () {
+export default async function HomePage ({searchParams}: {searchParams: {q: string}}) {
 	
-	const houses = await apiHouses.listhouses()
+	const houses = await apiHouses.search(searchParams.q)
+	console.log({houses})
 	// async function searchAction(formData: FormData) {
   //   'use server'
 
@@ -27,27 +25,23 @@ export default async function HomePage () {
 
 	return (
     <>
-			<section className="h-screen">
-				<Header />
-				<Hero />
-			</section>
+			<Hero />
 			<section>
 				<Filter />
+				<SearchBox />
 			</section>
 			{/* <section className='h-screen'>
 			</section>			 */}
-		{/* <SearchBox /> */}
 
 		{/* <form action={searchAction} className="inline-flex gap-2 mb-4">
         <input defaultValue={searchParams.q || ''} className="px-2" name="query" />
         <button type="submit" className="p-2 bg-white/20">Search</button>
       </form> */}
-			<section className='my-4 py-8 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-5 justify-center bg-teal-700 flex-wrap'>
-					{houses.map( (house) =>{ 
-					return(
-
-						
-					<Link key={house.permalink} href={`/house/${house.permalink}`}>
+			<section className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-centerflex-wrap'>
+					{houses.length > 0 ? (
+						houses.map((house) => ( 
+					
+						<Link key={house.permalink} href={`/house/${house.permalink}`}>
 							<Card
 				        id={house.id}
 				        permalink={house.permalink}
@@ -62,11 +56,18 @@ export default async function HomePage () {
 				        houseImage={house.houseImage}
 				      />
 						</Link>
-					)})}
+					))):(
+						<p>No hay casas disponibles con ese nombre 🤔</p>
+					)
+				}
 			</section>
-			<section>
-				<Footer />
-			</section>
+			{houses.length > 0 ? (
+				<Map houses={houses}/>
+			):(
+				<p>El mapa no se pudo renderizar, intente luego🤐</p>
+			)
+			}
+			{/*<Map/>*/}
     </>
   )
 }

@@ -33,7 +33,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/app/(index)/page.tsx"
+		"src/app/(index)/page.tsx",
+		"src/app/api/getHouses/route.tsx",
 	],
 	"exclude": [
 		"node_modules"

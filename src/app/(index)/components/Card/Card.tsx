@@ -38,15 +38,26 @@ const Card: React.FC<CardProps> = ({
 	<div className="max-w-6xl mx-auto">
 					<div className="max-w w-full">
 							<div className="bg-white flex flex-col shadow-xl rounded-lg overflow-hidden">
-									<div className="bg-cover bg-center p-4">
-											<img className='w-full' height={200} src={houseImage} alt={title} />
+									<div className="bg-cover bg-center mb-4">
+											<img className='w-full h-48 ' src={houseImage} alt={title} />
 									</div>
-									<div className="p-4">
+									<section className='flex gap-2 px-4'>
+										<div>
+											<span className='bg-teal-600 rounded-full shadow-md font-semibold text-sm text-teal-50 block py-1 px-2'>{type}</span>
+										</div>
+										<div>
+											<span className='bg-teal-600 rounded-full shadow-md font-semibold text-sm text-teal-50 block py-1 px-2'>{location}</span>
+										</div>
+										<div>
+											<span className='bg-teal-600 rounded-full shadow-md font-semibold text-sm text-teal-50 block py-1 px-2'>{realEstate}</span>
+										</div>
+									</section>
+									<div className="px-4 py-2">
 											<p className="uppercase tracking-wide text-sm font-bold text-gray-700">{title}</p>
 											<p className="text-3xl text-gray-900">${price}</p>
 											<p className="text-gray-700">{address}, {location}</p>
 									</div>
-									<div className="flex p-4 border-t border-gray-300 text-gray-700">
+									<div className="flex px-4 py-3 border-t border-gray-300 text-gray-700">
 											<div className="flex-1 inline-flex items-center">
 													<svg className="h-6 w-6 text-gray-600 fill-current mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 															<path d="M0 16L3 5V1a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4l3 11v5a1 1 0 0 1-1 1v2h-1v-2H2v2H1v-2a1 1 0 0 1-1-1v-5zM19 5h1V1H4v4h1V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h2V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1zm0 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V6h-2v2a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6H3.76L1.04 16h21.92L20.24 6H19zM1 17v4h22v-4H1zM6 4v4h4V4H6zm8 0v4h4V4h-4z"></path>

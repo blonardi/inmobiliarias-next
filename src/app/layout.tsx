@@ -1,8 +1,11 @@
+import React from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+//import { Roboto } from 'next/font/google'
 import './globals.css'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 
-// const inter = Inter({ subsets: ['latin'] })
+// const roboto = Roboto({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Inmobiliarias Larroque',
@@ -17,8 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='m-auto grid grid-rows-[auto,1fr,auto] min-h-screen bg-background'>
+      <body className='min-h-screen bg-slate-100'>
+					<Header/>
 					<main>{children}</main>
+					<Footer/>
 			</body>
     </html>
   )

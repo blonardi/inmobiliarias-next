@@ -15,7 +15,6 @@ import Map from "./components/Maps/Map"
 export default async function HomePage ({searchParams}: {searchParams: {q: string}}) {
 	
 	const houses = await apiHouses.search(searchParams.q)
-	console.log({houses})
 	// async function searchAction(formData: FormData) {
   //   'use server'
 

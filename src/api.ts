@@ -33,13 +33,6 @@ const apiHouses = {
     return houses.filter((house) => house.title.toLowerCase().includes(query.toLowerCase()))
   },
 
-  // post: async(): Promise<House> => {
-  // 	const response = await fetch('/api/submit', {
-  //     method: 'POST',
-  //     body: formData,
-  //   })
-  // }
-
 	postHouse: async (newHouseData: FormValues): Promise<House> => {
     //const response = await fetch('http://localhost:3001/api/houses', {
     //  method: 'POST',
@@ -67,6 +60,58 @@ const apiHouses = {
 			throw error
 		}
   },
+
+	getLocations: async() => {
+		try {
+			const response = await fetch('http://localhost:3001/api/houses/locations')
+			if (!response.ok) {
+				throw new Error('Error en la solicitud');
+			}
+			const locations = await response.json()
+			if (!Array.isArray(locations) || locations.length === 0) {
+				throw new Error('Error al obtener las ubicaciones');
+			}
+			return locations	
+		} catch (error) {
+			console.error('Error en la solicitud:', error);
+  		throw new Error('Error al obtener las ubicaciones');
+		}
+		
+	},
+
+	getTypesEstate: async() => {
+		try {
+			const response = await fetch('http:localhost:3001/api/houses/typesestate')
+			if(!response.ok){
+				throw new Error('Error en la solicitud')
+			}
+			const typesEstate = await response.json()
+			if(!Array.isArray(typesEstate) || typesEstate.length === 0){
+				throw new Error('Error al obtener tipos de terrenos')
+			}
+			return typesEstate
+		} catch (error) {
+			console.error('Error en la solicitud:', error);
+  		throw new Error('Error al obtener tipos de terrenos');
+		}
+	},
+
+	getRealEstates: async() => {
+		try {
+			const response = await fetch('http://localhost:3001/api/houses/realestates')
+			if(!response.ok){
+				throw new Error('Error en la solicitud')
+			}
+			const realEstate = await response.json()
+			if(!Array.isArray(realEstate) || realEstate.length === 0){
+				throw new Error('Error al obtener tipos de terrenos')
+			}
+			return realEstate
+		} catch (error) {
+			console.error('Error en la solicitud:', error);
+  		throw new Error('Error al obtener real estate names');
+		}
+	}
 
 }
 

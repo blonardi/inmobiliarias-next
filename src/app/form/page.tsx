@@ -2,8 +2,6 @@
 import apiHouses from '@/api'
 import { FormValues } from '@/types'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-// import {createHouse} from '@/app/services/houses/createHouse'
-// import {postHouse} from '@/app/services/houses/postHouse'
 // import { FormEvent } from 'react'
 // import { register } from 'module'
 

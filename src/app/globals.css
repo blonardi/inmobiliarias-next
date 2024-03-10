@@ -20,8 +20,12 @@
 	--colorSimilar: #DFBC8E;
 	/* componentes */
 	--navHeight: 100px;
-	--containerMaxWidth: 1320px;
+	--containerMaxWidth: 1920px;
 	--logoHeight: 100px;
+}
+
+html {
+	scroll-behavior: smooth;
 }
 
 * {
@@ -38,6 +42,8 @@ a {
 body {
 	font-family: var(--fontPrimary);
 	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .title {
@@ -56,7 +62,7 @@ body {
 	margin: 0 auto;
 }
 
-.hero {
+.header {
 	background-image: url('./assets/imgs/hero-bg.png');
 	object-fit: cover;
 }

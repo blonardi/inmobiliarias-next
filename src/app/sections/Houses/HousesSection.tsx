@@ -1,12 +1,12 @@
 import Card from '@/app/(index)/components/Card/Card'
 import Link from "next/link"
 
-import { getHouses } from '@/app/api/casas/route'
+import { getHouses, getHousesFiltered } from '@/app/api/casas/route'
 
-export default async function HousesSection() {
+export default async function HousesSection({location,type,realEstate,currentPage}:{location:string; type:string;realEstate:string; currentPage: number}) {
 
-	const houses = await getHouses()
-
+	//const houses = await getHouses()
+	const houses = await getHousesFiltered(location, type, realEstate)
 	return (
 		<section className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-centerflex-wrap'>
 					{houses.length > 0 ? (

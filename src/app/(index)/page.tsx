@@ -31,10 +31,6 @@ export default async function HomePage ({searchParams}: {searchParams: {location
 			</Suspense>
 			{/*<SearchBox />*/}
 
-			{/* <form action={searchAction} className="inline-flex gap-2 mb-4">
-        <input defaultValue={searchParams.q || ''} className="px-2" name="query" />
-        <button type="submit" className="p-2 bg-white/20">Search</button>
-      </form> */}
 			<Suspense key={location + type + realEstate + currentPage} fallback={<LoadingCard/>}>
 				<HousesSection location={location} type={type} realEstate={realEstate} currentPage={currentPage} />		
 			</Suspense>

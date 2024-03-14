@@ -19,6 +19,14 @@ export default function RootLayout({
 }) {
   return (
 	    <html lang="en">
+				<head>
+				<link rel="icon" href="/favicon.ico" sizes="any" />
+				<link rel="icon" href="/icon?<generated>" type="image/<generated>" sizes="<generated>" />
+				<link rel="apple-touch-icon"
+					href="/apple-icon?<generated>"
+					type="image/<generated>"
+					sizes="<generated>" /> 
+				</head>
 	      <body className='min-h-screen bg-slate-100'>
 					<Providers>
 						<main>{children}</main>

@@ -1,6 +1,10 @@
+import Nav from './Nav'
+
 const Hero = () => {
 	return (
 		<div className='bg-hero-bg-small md:bg-hero-bg relative flex justify-center items-center my-auto md:bg-cover bg-center bg-no-repeat bg-contain h-screen overflow-hidden'>
+			<Nav />
+
 			<div className="backdrop-blur-sm bg-white/30 absolute p-4 rounded-lg text-center flex flex-col items-center justify-start md:ml-96">
 				<h1 className="text-6xl font-semibold text-lime-800">kumpel</h1>
 				<p className="text-3xl font-light text-start mt-4 text-lime-600 ">inmuebles</p>

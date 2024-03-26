@@ -1,17 +1,18 @@
 import Card from '@/app/(index)/components/Card/Card'
 import Link from "next/link"
 
-import { getHouses, getHousesFiltered } from '@/app/api/casas/route'
+import apiHouses from '@/api'
 
 export default async function HousesSection({location,type,realEstate,currentPage}:{location:string; type:string;realEstate:string; currentPage: number}) {
 
 	//const houses = await getHouses()
-	const houses = await getHousesFiltered(location, type, realEstate)
+	const houses = await apiHouses.getHousesFiltered(location, type, realEstate)
+	console.log(houses)
 	return (
-		<section className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-centerflex-wrap'>
+			<section className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-center flex-wrap'>
 					{houses.length > 0 ? (
 						houses.map((house) => ( 
-							<Link key={house.permalink} href={`/house/${house.permalink}`}>
+							<Link key={house.permalink} href={`house/${house.permalink}`}>
 								<Card
 					        id={house.id}
 					        permalink={house.permalink}
@@ -27,7 +28,9 @@ export default async function HousesSection({location,type,realEstate,currentPag
 					      />
 						</Link>
 					))):(
-						<p>No hay casas disponibles con ese nombre 🤔</p>
+						<div className='flex justify-center items-center col-span-full'>
+							<p className='text-center text-lg'>Lo sentimos, no hay inmuebles con esas caracteristicas 🤔</p>
+						</div>
 					)
 				}
 			</section>

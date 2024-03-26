@@ -5,22 +5,41 @@ import { FormValues, House } from "./types"
 const apiHouses = {
 
   // si tira error, check {houses:[{}]}
-  listhouses: async (): Promise<House[]> => {
-    const response = await fetch('http://localhost:3000/api/casas', { cache: 'no-store' })
-    const data = await response.json()
-    const houses = data.houses
-    return houses
+  listhouses: async (): Promise<House> => {
+    const response = await fetch('http://localhost:3001/api/houses', { cache: 'no-store' })
+    const dataHouses = await response.json()
+		if (!dataHouses) {
+      throw new Error(`Error al traer las casas.`)
+    }
+    return dataHouses
   },
+
+	getHousesFiltered: async(location: House['location'], type: House['type'], realEstate: House['realEstate']): Promise<House> => {
+		const response = await fetch('http://localhost:3001/api/houses', { cache: 'no-store' })
+		const data = await response.json()
+		if (!location && !type && !realEstate) {
+			return data;
+		}
+		const filteredHouses = data.filter((house:House) => {
+			// Verificamos si la casa cumple con los criterios de filtrado
+			const locationMatch = !location || house.location === location;
+			const typeMatch = !type || house.type === type;
+			const realEstateMatch = !realEstate || house.realEstate === realEstate;
+			// Retornamos true si la casa cumple con todos los criterios de filtrado
+			return locationMatch && typeMatch && realEstateMatch;
+		});
+	
+		return filteredHouses;
+	},
 
   // permalink, parametro,
   fetchHouse: async (permalink: House['permalink']): Promise<House> => {
-    const response = await fetch(`http://localhost:3001/api/houses/${permalink}`)
+    const response = await fetch(`http://localhost:3001/api/houses/${permalink}`, {cache: 'no-store'})
     const house = await response.json()
 
     if (!house) {
       throw new Error(`House with permalink ${permalink} not found`)
     }
-
     return house
   },
 

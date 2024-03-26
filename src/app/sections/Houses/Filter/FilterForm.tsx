@@ -2,6 +2,7 @@
 import {useState} from 'react'
 import {Select, SelectSection, SelectItem, Button} from "@nextui-org/react";
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+
 export default function FilterForm({locations, types, realEstates}) {
 	const [values, setValues] = useState({
 		location: null,
@@ -24,7 +25,7 @@ export default function FilterForm({locations, types, realEstates}) {
 			}
 		}
 		replace(`${pathname}?${params.toString()}`)
-		console.log(searchParams.get('location')?.toString())
+		//console.log(searchParams.get('location')?.toString())
 	}
 	
 	const handleSelectChange = (event) => {
@@ -35,7 +36,7 @@ export default function FilterForm({locations, types, realEstates}) {
 	
 	return (
 				<form onSubmit={handleSubmit}>
-				  <div className="container mx-auto flex flex-row flex-wrap p-5 justify-center gap-4 sm:flex-row md:flex-col lg:flex-row items-center">
+				  <div className="container mx-auto flex flex-col md:flex-col lg:flex-row xl:flex-row flex-wrap p-5 justify-center gap-4  items-center">
 						<div>
 							<Select onChange={handleSelectChange} value={searchParams.get('location')} id="location" name='location' label="Ciudad"  data-te-select-init data-te-select-visible-options="3" className="rounded-md border text-black text-lg border-r-16 w-64">
 					      	{locations.map((location) => (
@@ -60,7 +61,7 @@ export default function FilterForm({locations, types, realEstates}) {
 					      	))}					
 							</Select>
 						</div>
-						<Button color="default" type="submit" variant="ghost" className="p-2 bg-gray/20">Search</Button>
+						<Button color="default" type="submit" variant="ghost" className=" block p-2 bg-gray/20">Search</Button>
 		  		</div>
 				</form>
 	)

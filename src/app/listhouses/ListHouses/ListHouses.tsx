@@ -1,4 +1,4 @@
-import EditCard from '@/app/components/EditCard/EditCard'
+import EditCard from '@/components/EditCard/EditCard'
 
 export default async function ListHouses({listHouses}) {	
 	return (		

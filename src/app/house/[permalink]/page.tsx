@@ -1,6 +1,8 @@
-import Image from 'next/image'
+//import Image from 'next/image'
 import apiHouses from '@/api'
 import Link from 'next/link'
+import { cn } from "@/lib/utils"
+import { buttonVariants } from '@/components/ui/button'
 
 export async function generateMetadata ({ params: { permalink } }: { params: { permalink: string } }) {
   const response = await fetch(`http://localhost:3001/api/houses/${permalink}`)
@@ -21,10 +23,8 @@ export default async function Details ({ params: { permalink } }: { params: { pe
 
   return (
 		<>
-				<Link href={'/'}>
-					<p className="bg-transparent hover:bg-emerald-500 text-emerald-700 font-semibold hover:text-white px-2 py-2 rounded border border-emerald-900 w-auto inline-block m-2">
-					Regresar a Inicio
-					</p>
+				<Link href={'/'} className={cn(buttonVariants({ variant: "outline", size:"lg"}), "bg-gray/20 hover:bg-lime-800 text-lime-800 font-semibold text-lg hover:text-white p-2 border-lime-800 w-auto inline-block m-2 transition duration-300 ease-in-out")}>
+					Regresar
 				</Link>
 			<section className='md:max-w-md lg:max-w-lg flex flex-col items-center justify-start mx-auto gap-y-6'>
 				<article key={house.permalink}>

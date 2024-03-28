@@ -2,6 +2,7 @@
 import apiHouses from '@/api'
 import { FormValues } from '@/types'
 import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 // import { FormEvent } from 'react'
 // import { register } from 'module'
 
@@ -17,16 +18,18 @@ const validateUrl = (value: string): boolean => {
 
 export default function FormPage () {
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
-
+	const router = useRouter()
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     // funcion de post
 		console.log(data)
 		try {
       const createdHouse = await apiHouses.postHouse(data);
       console.log('Casa creada con éxito:', createdHouse);
+			router.push('/')
       // Puedes realizar acciones adicionales después de crear la casa
     } catch (error) {
       console.error('Error al crear la casa:', error);
+			router.push('/')
       // Manejo de errores, muestra un mensaje al usuario, etc.
     }
   };

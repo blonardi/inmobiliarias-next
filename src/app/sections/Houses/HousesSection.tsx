@@ -1,5 +1,6 @@
-import Card from '@/app/(index)/components/Card/Card'
+import Card from '@/components/Card/Card'
 import Link from "next/link"
+
 
 import apiHouses from '@/api'
 
@@ -9,7 +10,8 @@ export default async function HousesSection({location,type,realEstate,currentPag
 	const houses = await apiHouses.getHousesFiltered(location, type, realEstate)
 	console.log(houses)
 	return (
-			<section className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-center flex-wrap'>
+			<section id='houses'>
+				<div className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-center flex-wrap'>
 					{houses.length > 0 ? (
 						houses.map((house) => ( 
 							<Link key={house.permalink} href={`house/${house.permalink}`}>
@@ -33,6 +35,7 @@ export default async function HousesSection({location,type,realEstate,currentPag
 						</div>
 					)
 				}
+				</div>
 			</section>
 	)
 }

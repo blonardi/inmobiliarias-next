@@ -82,7 +82,7 @@ const apiHouses = {
 
 	getLocations: async() => {
 		try {
-			const response = await fetch('http://localhost:3001/api/houses/locations')
+			const response = await fetch('http://localhost:3001/api/houses/locations', { cache: 'no-store' })
 			if (!response.ok) {
 				throw new Error('Error en la solicitud');
 			}
@@ -100,7 +100,7 @@ const apiHouses = {
 
 	getTypesEstate: async() => {
 		try {
-			const response = await fetch('http:localhost:3001/api/houses/typesestate')
+			const response = await fetch('http:localhost:3001/api/houses/typesestate', { cache: 'no-store' })
 			if(!response.ok){
 				throw new Error('Error en la solicitud')
 			}
@@ -117,7 +117,7 @@ const apiHouses = {
 
 	getRealEstates: async() => {
 		try {
-			const response = await fetch('http://localhost:3001/api/houses/realestates')
+			const response = await fetch('http://localhost:3001/api/houses/realestates', { cache: 'no-store' })
 			if(!response.ok){
 				throw new Error('Error en la solicitud')
 			}

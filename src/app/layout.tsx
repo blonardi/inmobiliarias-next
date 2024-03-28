@@ -2,7 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 //import { Roboto } from 'next/font/google'
 import './globals.css'
-import Footer from './components/Footer/Footer'
+import Footer from '@/components/Footer/Footer'
 import {Providers} from "./providers";
 // const roboto = Roboto({ subsets: ['latin'] })
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 					type="image/<generated>"
 					sizes="<generated>" /> 
 				</head>
-	      <body className='min-h-screen bg-slate-100'>
+	      <body className='min-h-screen relative bg-slate-100'>
 					<Providers>
 						<main>{children}</main>
 						<Footer/>

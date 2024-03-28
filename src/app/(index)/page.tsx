@@ -1,12 +1,12 @@
 
 
 import Header from "../sections/Header/Header"
-import SearchBox from "./components/SearchBox"
+//import SearchBox from '@/components/SearchBox/SearchBox'
 import HousesSection from "../sections/Houses/HousesSection"
 //import Map from "./components/Maps/Map"
 import Filter from "../sections/Houses/Filter/Filter"
 import {Suspense} from 'react'
-import LoadingCard from '@/app/(index)/components/ui/loadingCard'
+import LoadingCard from '@/components/ui/loadingCard'
 
 
 

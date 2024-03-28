@@ -1,6 +1,8 @@
 'use client'
 import {useState} from 'react'
-import {Select, SelectSection, SelectItem, Button} from "@nextui-org/react";
+import { Button } from '@/components/ui/button'
+//import {Select, SelectSection, SelectItem} from "@nextui-org/react"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from '@/components/ui/select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 export default function FilterForm({locations, types, realEstates}) {
@@ -9,7 +11,7 @@ export default function FilterForm({locations, types, realEstates}) {
 		type: null,
 		realEstate: null
 	})
-	
+	console.log({types})
 	const searchParams = useSearchParams()
 	const pathname = usePathname()
 	const {replace} = useRouter()
@@ -28,40 +30,80 @@ export default function FilterForm({locations, types, realEstates}) {
 		//console.log(searchParams.get('location')?.toString())
 	}
 	
-	const handleSelectChange = (event) => {
-		const {value, name} = event.target
-		//console.log({name, value})
-		setValues({...values, [name]:value})
-	}
+	//const handleSelectChange = (event) => {
+	//	const {value, name} = event.target
+	//	//console.log({name, value})
+	//	setValues({...values, [name]:value})
+	//}
 	
 	return (
 				<form onSubmit={handleSubmit}>
-				  <div className="container mx-auto flex flex-col md:flex-col lg:flex-row xl:flex-row flex-wrap p-5 justify-center gap-4  items-center">
-						<div>
-							<Select onChange={handleSelectChange} value={searchParams.get('location')} id="location" name='location' label="Ciudad"  data-te-select-init data-te-select-visible-options="3" className="rounded-md border text-black text-lg border-r-16 w-64">
-					      	{locations.map((location) => (
-					        <SelectItem key={location} value={location}>{location}</SelectItem>
-					      	))}					
-							</Select>
-						</div>
-						<div>
-							<Select onChange={handleSelectChange} value={searchParams.get('type')?.toString()} id='type' name='type'
-	          		label="Tipo"  data-te-select-init data-te-select-visible-options="3" className="rounded-md border text-black text-lg border-r-16 w-64">
-					      	{types.map((type) => (
-					        <SelectItem key={type} value={type}>{type}</SelectItem>
-					      	))}					
-							</Select>
-						</div>
-						<div>
-							<Select
-								onChange={handleSelectChange} value={searchParams.get('realEstate')?.toString()} id='realEstate' name='realEstate'
-	          		label="Inmobiliaria"  data-te-select-init data-te-select-visible-options="3" className="rounded-md border text-black text-lg border-r-16 w-64">
-					      	{realEstates.map((realEstate) => (
-					        <SelectItem key={realEstate} value={realEstate}>{realEstate}</SelectItem>
-					      	))}					
-							</Select>
-						</div>
-						<Button color="default" type="submit" variant="ghost" className=" block p-2 bg-gray/20">Search</Button>
+				  <div className="container mx-auto flex flex-col md:flex-col lg:flex-row xl:flex-row  p-5 justify-center gap-4  items-center">
+						
+						<Select
+							onValueChange={(newLocation) => setValues({ ...values, location: newLocation })}
+							//value={dataForm.location}
+							defaultValue={searchParams.get('location')?.toString()}
+							name='location'
+							id='location'
+							data-te-select-init data-te-select-visible-options="3"
+						>
+							<SelectTrigger className="w-full min-w-[180px] lg:text-lg text-emerald-800 font-semibold p-6">
+								<SelectValue placeholder="Ciudad" className='font-semibold text-slate-800'/>
+							</SelectTrigger>
+							<SelectContent className='bg-slate-300'>
+								<SelectGroup>
+									<SelectLabel>Ciudad</SelectLabel>
+									{locations.map((location) => (
+				        		<SelectItem className='text-emerald-800 font-semibold' key={location} value={location}>{location}</SelectItem>
+				      		))}	
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+						<Select
+							onValueChange={(newType) => setValues({ ...values, type: newType })}
+							//value={dataForm.type}  // Valor actual del estado
+							defaultValue={searchParams.get('type')?.toString()}  // Valor por defecto (igual al actual)
+							name='type'
+							id='type'
+							data-te-select-init data-te-select-visible-options="3"
+							className="rounded-md  text-black text-lg border-r-16 w-full"
+						>
+							<SelectTrigger className="w-full min-w-[180px] lg:text-lg text-emerald-800 font-semibold p-6">
+								<SelectValue placeholder="Tipo" />
+							</SelectTrigger>
+							<SelectContent className='bg-slate-300'>
+								<SelectGroup>
+									<SelectLabel>Tipo</SelectLabel>
+									{types.map((type) => (
+				        		<SelectItem className='text-emerald-800 font-semibold' key={type} value={type}>{type}</SelectItem>
+				      		))}	
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+						<Select
+							onValueChange={(newRealEstate) => setValues({ ...values, realEstate: newRealEstate })}
+							//value={dataForm.realEstate}
+							defaultValue={searchParams.get('realEstate')?.toString()}
+							name='realEstate'
+							id='realEstate'
+							data-te-select-init data-te-select-visible-options="3"
+							//className="rounded-md text-black font-semibold text-lg border-r-16 w-64"
+						>
+							<SelectTrigger className="w-full min-w-[180px] lg:text-lg text-emerald-800 font-semibold p-6">
+								<SelectValue placeholder="Inmobiliaria" />
+							</SelectTrigger>
+							<SelectContent className='bg-slate-300'>
+								<SelectGroup>
+									<SelectLabel>Inmobiliaria</SelectLabel>
+									{realEstates.map((realEstate) => (
+				        		<SelectItem className='text-emerald-800 font-semibold' key={realEstate} value={realEstate}>{realEstate}</SelectItem>
+				      		))}
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+						
+						<Button size="lg" type="submit" variant="custom" >Buscar</Button>
 		  		</div>
 				</form>
 	)

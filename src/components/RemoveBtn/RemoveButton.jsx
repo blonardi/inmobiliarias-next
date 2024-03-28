@@ -1,6 +1,7 @@
 'use client'
 import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation"
+
 export default function RemoveButton({ permalink }) {
 	const router = useRouter()
 	const removeHouse = async () => {

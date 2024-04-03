@@ -1,22 +1,34 @@
 'use client'
-import {useState} from 'react'
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button'
 //import {Select, SelectSection, SelectItem} from "@nextui-org/react"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from '@/components/ui/select';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { House } from '@/types' 
 
-export default function FilterForm({locations, types, realEstates}) {
-	const [values, setValues] = useState({
+interface FilterFormProps {
+  locations: House['location'][]; // Suponiendo que locations es un arreglo de strings
+  types: House['type'][]; // Suponiendo que types es un arreglo de strings
+  realEstates: House['realEstate'][]; // Suponiendo que realEstates es un arreglo de strings
+}
+interface FormValues {
+  location: House['location'] | null; // Tipo para la ubicación, ubicación válida o null
+  type: House['type'] | null; // Tipo para el tipo de casa, tipo válido o null
+  realEstate: House['realEstate'] | null; // Tipo para la inmobiliaria, inmobiliaria válida o null
+}
+
+export default function FilterForm({locations, types, realEstates}: FilterFormProps) {
+	const [values, setValues] = useState<FormValues>({
 		location: null,
 		type: null,
 		realEstate: null
 	})
-	console.log({types})
+	//console.log({types})
 	const searchParams = useSearchParams()
 	const pathname = usePathname()
 	const {replace} = useRouter()
 
-	const handleSubmit = (event) => {
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 		const params = new URLSearchParams(searchParams)
 		for(const [key,value] of Object.entries(values)){
@@ -45,7 +57,6 @@ export default function FilterForm({locations, types, realEstates}) {
 							//value={dataForm.location}
 							defaultValue={searchParams.get('location')?.toString()}
 							name='location'
-							id='location'
 							data-te-select-init data-te-select-visible-options="3"
 						>
 							<SelectTrigger className="w-full min-w-[180px] lg:text-lg text-emerald-800 font-semibold p-6">
@@ -65,7 +76,6 @@ export default function FilterForm({locations, types, realEstates}) {
 							//value={dataForm.type}  // Valor actual del estado
 							defaultValue={searchParams.get('type')?.toString()}  // Valor por defecto (igual al actual)
 							name='type'
-							id='type'
 							data-te-select-init data-te-select-visible-options="3"
 							className="rounded-md  text-black text-lg border-r-16 w-full"
 						>
@@ -86,7 +96,6 @@ export default function FilterForm({locations, types, realEstates}) {
 							//value={dataForm.realEstate}
 							defaultValue={searchParams.get('realEstate')?.toString()}
 							name='realEstate'
-							id='realEstate'
 							data-te-select-init data-te-select-visible-options="3"
 							//className="rounded-md text-black font-semibold text-lg border-r-16 w-64"
 						>

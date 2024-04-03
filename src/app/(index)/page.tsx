@@ -21,7 +21,7 @@ export default async function HomePage ({searchParams}: {searchParams: {location
   // }
 	console.log(searchParams)
 	const  {location, type, realEstate}= searchParams || ''
-	const currentPage = Number(searchParams?.page) || 1
+	//const currentPage = Number(searchParams?.page) || 1
 	console.log(location, type, realEstate)
 	return (
     <>

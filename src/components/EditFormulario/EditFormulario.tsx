@@ -1,29 +1,52 @@
 'use client'
-import { React, useState } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 //import './Form.css'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import { House } from '@/types' 
 
+interface EditFormularioProps extends Omit<House, 'id' | 'date'>{}
 
-export default function EditFormulario({ permalink, price, title, address, description, dimention, type, location, realEstate, houseImage }) {
-	const [dataForm, setDataForm] = useState({
-		price: price, title: title, address: address, description: description, dimention: dimention, type: type, location: location, realEstate: realEstate, houseImage: houseImage
+interface EditFormularioValues {
+	price: House['price'],
+	title: House['title'],
+	address: House['address'],
+	description: House['description'],
+	dimention: House['dimention'],
+	type: House['type'],
+	location: House['location'],
+	realEstate: House['realEstate'],
+	houseImage: House['houseImage']
+
+}
+
+export default function EditFormulario({ permalink, price, title, address, description, dimention, type, location, realEstate, houseImage }: EditFormularioProps) {
+	const [dataForm, setDataForm] = useState<EditFormularioValues>({
+		price,
+	  title,
+	  address,
+	  description,
+	  dimention,
+	  type,
+	  location,
+	  realEstate,
+	  houseImage
 	})
 	//console.log(dataForm.realEstate)
 
 	const router = useRouter()
-	const handleChange = (e) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		console.log("evento", e)
-		const { name, value } = e.target
+		const { name, value } = e.currentTarget
 		console.log(name, value)
 		setDataForm(prevState => ({
 			...prevState,
 			[name]: value
 		}))
 	}
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		//console.log(e)
 		try {
@@ -48,7 +71,6 @@ export default function EditFormulario({ permalink, price, title, address, descr
 			<form onSubmit={handleSubmit} className="md:max-w-xl lg:max-w-3xl mx-auto flex flex-col items-center justify-center gap-y-6 border-8 border-emerald-800 p-4 bg-slate-100 ">
 
 				<h2 className='font-semibold text-2xl'>Edicion de Casa</h2>
-
 
 				<div className='grid lg:grid-cols-2 gap-y-2'>
 					<div className='w-full group min-h-[300px] h-full'>

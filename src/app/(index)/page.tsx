@@ -31,8 +31,8 @@ export default async function HomePage ({searchParams}: {searchParams: {location
 			</Suspense>
 			{/*<SearchBox />*/}
 
-			<Suspense key={location + type + realEstate + currentPage} fallback={<LoadingCard/>}>
-				<HousesSection location={location} type={type} realEstate={realEstate} currentPage={currentPage} />		
+			<Suspense key={location + type + realEstate} fallback={<LoadingCard/>}>
+				<HousesSection location={location} type={type} realEstate={realEstate}/>		
 			</Suspense>
 
 			{/*{houses.length > 0 ? (

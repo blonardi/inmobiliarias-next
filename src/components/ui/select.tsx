@@ -19,7 +19,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-lime-800 placeholder:font-semibold placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -146,30 +146,6 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
-const SelectItemWithTailwind = React.forwardRef(
-  ({ className, children, ...props }, ref) => (
-    <SelectItem
-      ref={ref}
-      className={cn(
-        "select-item",
-        className,
-        props.isActive && tw`
-          border-transparent !important
-          box-shadow: inset 0 0 0 2px green !important
-          font-weight-semibold !important
-        `,
-        props.isFocused && tw`
-          outline-none
-          box-shadow: 0 0 0 2px rgba(0, 128, 0, 0.2)
-        `,
-      )}
-      {...props}
-    >
-      {children}
-    </SelectItem>
-  )
-);
-
 export {
   Select,
   SelectGroup,
@@ -181,5 +157,4 @@ export {
   SelectSeparator,
   SelectScrollUpButton,
   SelectScrollDownButton,
-	SelectItemWithTailwind,
 }

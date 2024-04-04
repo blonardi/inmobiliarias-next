@@ -77,7 +77,7 @@ export default function FilterForm({locations, types, realEstates}: FilterFormPr
 							defaultValue={searchParams.get('type')?.toString()}  // Valor por defecto (igual al actual)
 							name='type'
 							data-te-select-init data-te-select-visible-options="3"
-							className="rounded-md  text-black text-lg border-r-16 w-full"
+							className="rounded-md  text-black text-lg border-r-16 w-full my-custom-class"
 						>
 							<SelectTrigger className="w-full min-w-[180px] lg:text-lg text-emerald-800 font-semibold p-6">
 								<SelectValue placeholder="Tipo" />

@@ -35,6 +35,7 @@
 		".next/types/**/*.ts",
 		"src/app/(index)/page.tsx",
 		"src/app/api/getHouses/route.tsx",
+		"src/components/ui/select2.jsx",
 	],
 	"exclude": [
 		"node_modules"

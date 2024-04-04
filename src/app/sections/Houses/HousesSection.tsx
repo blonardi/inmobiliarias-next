@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import apiHouses from '@/api'
 
-export default async function HousesSection({location,type,realEstate,currentPage}:{location:string; type:string;realEstate:string; currentPage: number}) {
+export default async function HousesSection({location,type,realEstate}:{location:string; type:string;realEstate:string}) {
 
 	//const houses = await getHouses()
 	const houses = await apiHouses.getHousesFiltered(location, type, realEstate)

@@ -4,7 +4,12 @@ import Link from "next/link";
 import { Card, CardHeader, CardBody, Divider, Image } from "@nextui-org/react";
 import RemoveBtn from '@/components/RemoveBtn/RemoveButton'
 import { HiPencilAlt } from 'react-icons/hi'
-export default function App({ permalink, houseImage, title, price, address, description }) {
+import { House } from "@/types";
+
+interface EditCardProps extends Omit <House,  'dimention' | 'type' | 'location'
+| 'realEstate'> {}
+
+export default function EditCard({ permalink, houseImage, title, price, address, description }: EditCardProps) {
 	return (
 		<Card key={permalink} className="md:min-w-[600px] max-w-[400px]">
 			<CardHeader className="flex justify-between">

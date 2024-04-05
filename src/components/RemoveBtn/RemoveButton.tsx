@@ -1,8 +1,11 @@
 'use client'
 import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation"
+import { House } from "@/types"
+interface RemoveButtonProps extends Pick<House, 'permalink'> {}
 
-export default function RemoveButton({ permalink }) {
+
+export default function RemoveButton({ permalink }: RemoveButtonProps) {
 	const router = useRouter()
 	const removeHouse = async () => {
 		const confirmed = confirm('Estas seguro de eliminar esta casa?')

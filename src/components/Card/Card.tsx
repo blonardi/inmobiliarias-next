@@ -1,12 +1,12 @@
 // import './card.css'
 import React from 'react';
-import Image from 'next/image.js';
-import { ItemCard } from '../ItemCard/ItemCard.jsx'
+import Image from 'next/image';
+//import { ItemCard } from '../ItemCard/ItemCard.jsx'
 // import { Link } from 'react-router-dom'
 
 
 interface CardProps {
-  id: string;
+  //id: string;
   permalink: string;
   price: number;
   title: string;
@@ -20,12 +20,12 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({
-  id,
-  permalink,
+  //id,
+  //permalink,
   price,
   title,
   address,
-  description,
+  //description,
   dimention,
   type,
   location,
@@ -41,7 +41,7 @@ const Card: React.FC<CardProps> = ({
 					<div className="max-w w-full">
 							<div className="bg-white flex flex-col shadow-xl rounded-lg overflow-hidden">
 									<div className="bg-cover bg-center mb-4">
-										<img className='w-full h-48 ' src={houseImage} alt={title} />
+										<Image className='w-full h-48 ' src={houseImage} alt={title} />
 									</div>
 									<section className='flex gap-2 px-4'>
 										<div>

@@ -81,10 +81,10 @@ const Map: React.FC<LeafletMapProps> = ({ houses }) => {
     }
   }, [properties]);
 
-  const customIcon = new Icon({
-    iconUrl: mapIcon,
-    iconSize: [32, 32],
-  });
+  //const customIcon = new Icon({
+  //  iconUrl: mapIcon,
+  //  iconSize: [32, 32],
+  //});
 
 	const housingIcon = new Icon({
     iconUrl: 'https://img.icons8.com/plasticine/100/exterior.png',

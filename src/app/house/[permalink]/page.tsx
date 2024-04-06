@@ -3,6 +3,7 @@ import apiHouses from '@/api'
 import Link from 'next/link'
 import { cn } from "@/lib/utils"
 import { buttonVariants } from '@/components/ui/button'
+import Image from 'next/image'
 
 export async function generateMetadata ({ params: { permalink } }: { params: { permalink: string } }) {
   const response = await fetch(`http://localhost:3001/api/houses/${permalink}`)
@@ -30,7 +31,7 @@ export default async function Details ({ params: { permalink } }: { params: { pe
 				<article key={house.permalink}>
 		      <div className='house-details'>
 		        <div className='details details-img'>
-		          <img width={800} height={600} src={house.houseImage} alt='House' />
+		          <Image width={800} height={600} src={house.houseImage} alt='House' />
 		        </div>
 						<section className='flex gap-2 py-2 px-4'>
 								<div>

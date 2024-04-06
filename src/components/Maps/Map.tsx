@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { Icon, LatLngTuple } from 'leaflet';
-import mapIcon from '../../../assets/imgs/maps-pin.svg';
+//import mapIcon from '../../../assets/imgs/maps-pin.svg';
 
 interface LeafletMapProps {
   houses: House[];

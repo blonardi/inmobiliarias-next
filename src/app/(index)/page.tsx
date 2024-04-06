@@ -7,11 +7,11 @@ import HousesSection from "../sections/Houses/HousesSection"
 import Filter from "../sections/Houses/Filter/Filter"
 import {Suspense} from 'react'
 import LoadingCard from '@/components/ui/loadingCard'
+import { House } from "@/types"
 
+interface SearchParamsProps extends House{}
 
-
-
-export default async function HomePage ({searchParams}: {searchParams: {location?: string, type?: string, realEstate?: string, page?: string}}) {
+export default async function HomePage ({searchParams}: {searchParams: SearchParamsProps }) {
 	//const houses = await apiHouses.search(searchParams.q)
 	
 	// async function searchAction(formData: FormData) {

@@ -1,6 +1,7 @@
 import EditCard from '@/components/EditCard/EditCard'
+import { House } from '@/types'
 
-export default async function ListHouses({listHouses}) {	
+export default async function ListHouses({listHouses}:{listHouses: House[]}) {	
 	return (		
 		<div className='container'>
 			<div className="md:max-w-xl lg:max-w-3xl mx-auto flex flex-col items-center justify-center gap-y-8">
@@ -8,7 +9,7 @@ export default async function ListHouses({listHouses}) {
 					<h2 className='text-center font-semibold text-4xl'>Lista de Casas</h2>
 				</header>
 				<section className='flex flex-col items-center justify-center gap-y-6'>
-					{listHouses.length > 0 ? (
+					{listHouses && listHouses.length > 0 ? (
 						listHouses.map(({permalink, houseImage, title, price, address, description}) => ( 
 							<EditCard key={permalink} houseImage={houseImage} title={title} price={price} address={address} description={description} permalink={permalink} />
 					))) :

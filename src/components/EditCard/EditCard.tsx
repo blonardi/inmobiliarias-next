@@ -6,7 +6,7 @@ import RemoveBtn from '@/components/RemoveBtn/RemoveButton'
 import { HiPencilAlt } from 'react-icons/hi'
 import { House } from "@/types";
 
-interface EditCardProps extends Omit <House,  'dimention' | 'type' | 'location'
+interface EditCardProps extends Omit <House, 'id' | 'date' | 'dimention' | 'type' | 'location'
 | 'realEstate'> {}
 
 export default function EditCard({ permalink, houseImage, title, price, address, description }: EditCardProps) {

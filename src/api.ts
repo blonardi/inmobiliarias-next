@@ -5,7 +5,7 @@ import { FormValues, House } from "./types"
 const apiHouses = {
 
   // si tira error, check {houses:[{}]}
-  listhouses: async (): Promise<House> => {
+  listhouses: async (): Promise<House[]> => {
     const response = await fetch('http://localhost:3001/api/houses', { cache: 'no-store' })
     const dataHouses = await response.json()
 		if (!dataHouses) {
@@ -43,14 +43,14 @@ const apiHouses = {
     return house
   },
 
-  search: async (query: string): Promise<House[]> => {
-    const houses = await apiHouses.listhouses()
-    if (!query) {
-      // Si query está vacío, retornar todas las casas
-      return houses
-    }
-    return houses.filter((house) => house.title.toLowerCase().includes(query.toLowerCase()))
-  },
+  //search: async (query: string): Promise<House[]> => {
+  //  const houses = await apiHouses.listhouses()
+  //  if (!query) {
+  //    // Si query está vacío, retornar todas las casas
+  //    return houses
+  //  }
+  //  return houses.filter((house) => house.title.toLowerCase().includes(query.toLowerCase()))
+  //},
 
 	postHouse: async (newHouseData: FormValues): Promise<House> => {
     //const response = await fetch('http://localhost:3001/api/houses', {

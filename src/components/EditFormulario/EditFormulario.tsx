@@ -75,121 +75,117 @@ export default function EditFormulario({ permalink, price, title, address, descr
 				<div className='grid lg:grid-cols-2 gap-y-2'>
 					<div className='w-full group min-h-[300px] h-full'>
 						<label htmlFor='housePrice'>
-							<Input size='lg' variant='flat'
-								label="Precio"
+							<Input size={16}
 								onChange={handleChange}
 								value={dataForm.price}
 								type='number'
 								name='price'
-								placeholder='Precio de la casa'
+								placeholder='Precio casa'
 								id='housePrice'
 							/>
 						</label>
 						<label htmlFor='houseTitle'>
-							<Input size='lg' variant='flat'
-								label="Titulo"
+							<Input size={16}
 								onChange={handleChange}
 								defaultValue={dataForm.title}
 								type='text'
 								name='title'
 								placeholder='Titulo de la casa'
 								id='houseTitle'
-								classNames={{
-									label: ["text-slate-900", "font-semibold"],
-									input: [
-										"bg-transparent",
-										"text-black/90 dark:text-white/90",
-										"placeholder:text-default-700/50",
-									],
-									inputWrapper: [
-										"bg-slate-300"
-									],
-									//innerWrapper: "bg-slate-400",
-								}}
+								//classNames={{
+								//	label: ["text-slate-900", "font-semibold"],
+								//	input: [
+								//		"bg-transparent",
+								//		"text-black/90 dark:text-white/90",
+								//		"placeholder:text-default-700/50",
+								//	],
+								//	inputWrapper: [
+								//		"bg-slate-300"
+								//	],
+								//	//innerWrapper: "bg-slate-400",
+								//}}
 							/>
 						</label>
 						<label htmlFor='houseAddress'>
-							<Input size='lg' variant='flat'
-								label="Direccion"
+							<Input size={16}
 								onChange={handleChange}
 								value={dataForm.address}
 								type='text'
 								name='address'
 								placeholder='Direccion'
 								id='houseAddress'
-								classNames={{
-									label: ["text-slate-900", "font-semibold"],
-									input: [
-										"bg-transparent",
-										"text-black/90 dark:text-white/90",
-										"placeholder:text-default-700/50",
-									],
-									inputWrapper: [
-										"bg-slate-300"
-									],
-									//innerWrapper: "bg-slate-400",
-								}}
+								//classNames={{
+								//	label: ["text-slate-900", "font-semibold"],
+								//	input: [
+								//		"bg-transparent",
+								//		"text-black/90 dark:text-white/90",
+								//		"placeholder:text-default-700/50",
+								//	],
+								//	inputWrapper: [
+								//		"bg-slate-300"
+								//	],
+								//	//innerWrapper: "bg-slate-400",
+								//}}
 							/>
 						</label>
 						<label htmlFor='houseDescription'>
-							<Input size='lg' variant='flat'
-								label="Descripcion"
+							<Input size={16}
 								onChange={handleChange}
 								value={dataForm.description}
 								type='textarea'
 								name='description'
 								placeholder='Descripcion'
 								id='houseDescription'
-								classNames={{
-									label: ["text-slate-900", "font-semibold"],
-									input: [
-										"bg-transparent",
-										"text-black/90 dark:text-white/90",
-										"placeholder:text-default-700/50",
-									],
-									inputWrapper: [
-										"bg-slate-300"
-									],
-									//innerWrapper: "bg-slate-400",
-								}}
+								//classNames={{
+								//	label: ["text-slate-900", "font-semibold"],
+								//	input: [
+								//		"bg-transparent",
+								//		"text-black/90 dark:text-white/90",
+								//		"placeholder:text-default-700/50",
+								//	],
+								//	inputWrapper: [
+								//		"bg-slate-300"
+								//	],
+								//	//innerWrapper: "bg-slate-400",
+								//}}
 							/>
 						</label>
 					</div>
 
 					<div className='w-full group'>
 						<label htmlFor='houseDimention'>
-							<Input size='lg' variant='flat'
-								label='Dimension'
+							<Input
+							 	size={16}
+								//variant='flat'
+								//label='Dimension'
 								onChange={handleChange}
 								value={dataForm.dimention}
 								type='number'
 								name='dimention'
 								placeholder='Dimension'
 								id='houseDimention'
-								classNames={{
-									label: ["text-slate-900", "font-semibold"],
-									input: [
-										"bg-transparent",
-										"text-black/90 dark:text-white/90",
-										"placeholder:text-default-700/50",
-									],
-									inputWrapper: [
-										"bg-slate-300"
-									],
-									//innerWrapper: "bg-slate-400",
-								}}
+								//className={{
+								//	label: ["text-slate-900", "font-semibold"],
+								//	input: [
+								//		"bg-transparent",
+								//		"text-black/90 dark:text-white/90",
+								//		"placeholder:text-default-700/50",
+								//	],
+								//	inputWrapper: [
+								//		"bg-slate-300"
+								//	],
+								//	//innerWrapper: "bg-slate-400",
+								//}}
 							/>
 						</label>
 						<label htmlFor='houseType'>
 							<Select
-								label="Tipo"
 								onValueChange={(newType) => setDataForm({ ...dataForm, type: newType })}
 								//value={dataForm.type}  // Valor actual del estado
 								defaultValue={dataForm.type.toString()}  // Valor por defecto (igual al actual)
 								name='type'
-								id='houseType'
 								data-te-select-init data-te-select-visible-options="3"
-								className="rounded-md  text-black text-lg border-r-16 w-full"
+								//className="rounded-md  text-black text-lg border-r-16 w-full"
 
 							>
 								<SelectTrigger className="w-full bg-red">
@@ -213,12 +209,10 @@ export default function EditFormulario({ permalink, price, title, address, descr
 						</label>
 						<label htmlFor='houseLocation'>
 							<Select
-								label="Ciudad"
 								onValueChange={(newLocation) => setDataForm({ ...dataForm, location: newLocation })}
 								//value={dataForm.location}
 								defaultValue={dataForm.location.toString()}
 								name='location'
-								id='houseLocation'
 								data-te-select-init data-te-select-visible-options="3"
 							>
 								<SelectTrigger className="w-full bg-red">
@@ -238,17 +232,15 @@ export default function EditFormulario({ permalink, price, title, address, descr
 						</label>
 						<label htmlFor="houseRealEstate">
 							<Select
-								label="Inmobiliaria"
 								onValueChange={(newRealEstate) => setDataForm({ ...dataForm, realEstate: newRealEstate })}
 								//value={dataForm.realEstate}
 								defaultValue={dataForm.realEstate.toString()}
 								name='realEstate'
-								id='houseRealEstate'
 								data-te-select-init data-te-select-visible-options="3"
-								className="rounded-md text-black font-semibold text-lg border-r-16 w-64"
+								//className="rounded-md text-black font-semibold text-lg border-r-16 w-64"
 							>
 								<SelectTrigger className="w-full bg-red">
-									<SelectValue placeholder="Theme" />
+									<SelectValue placeholder="Inmobiliaria" />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
@@ -261,8 +253,10 @@ export default function EditFormulario({ permalink, price, title, address, descr
 							</Select>
 						</label>
 					</div>
-					<Input variant='flat' onChange={handleChange}
-						label="Imagen"
+					<Input 
+						//variant='flat'
+						onChange={handleChange}
+						//label="Imagen"							
 						value={dataForm.houseImage} type='text' name='houseImage' placeholder='Url de imagen' className='w-full' />
 				</div>
 				<Button className='border-lime-800 text-lime-800 hover:bg-lime-800 hover:text-white transition duration-300 ease-in-out block p-2 bg-gray/20' variant="outline" type="submit">Actualizar</Button>

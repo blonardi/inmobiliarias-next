@@ -14,7 +14,7 @@ const apiHouses = {
     return dataHouses
   },
 
-	getHousesFiltered: async(location: House['location'], type: House['type'], realEstate: House['realEstate']): Promise<House> => {
+	getHousesFiltered: async(location: House['location'], type: House['type'], realEstate: House['realEstate']): Promise<House[]> => {
 		const response = await fetch('http://localhost:3001/api/houses', { cache: 'no-store' })
 		const data = await response.json()
 		if (!location && !type && !realEstate) {

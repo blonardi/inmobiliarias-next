@@ -1,7 +1,6 @@
 import axios from "axios"
 import { FormValues, House } from "./types"
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.API_URL_PRODUCTION : process.env.API_URL_LOCAL;
-
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URL : process.env.NEXT_PUBLIC_LOCAL_API_URL
 
 const apiHouses = {
 
@@ -34,15 +33,40 @@ const apiHouses = {
 	},
 
   // permalink, parametro,
-  fetchHouse: async (permalink: House['permalink']): Promise<House> => {
-    const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
-    const house = await response.json()
+  //fetchHouse: async (permalink: House['permalink']): Promise<House> => {
+	//	try{
+	//		const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
+	//		if (!response.ok) {
+	//			throw new Error('Error en la solicitud');
+	//		}
+	//		const house = await response.json()
+	//		if (!house) {
+	//			throw new Error(`House with permalink ${permalink} not found`)
+	//		}
+	//		return house
+	//	}catch(error){
+	//		console.error('Error en la solicitud para conseguir una casa:', error);
+  //		throw new Error('Error al obtener una casa.');
+	//	}
+  //},
 
-    if (!house) {
-      throw new Error(`House with permalink ${permalink} not found`)
-    }
-    return house
-  },
+	getHouse: async (permalink: House['permalink']): Promise<House> => {
+		try{
+			console.log({baseUrl})
+			const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
+			if (!response.ok) {
+				throw new Error('Error en la solicitud');
+			}
+			const house = await response.json()
+			if (!house) {
+				throw new Error(`House with permalink ${permalink} not found`)
+			}
+			return house
+		}catch(error){
+			console.error('Error en la solicitud para conseguir una casa:', error);
+			throw new Error('Error al obtener una casa.');
+		}
+	},
 
   //search: async (query: string): Promise<House[]> => {
   //  const houses = await apiHouses.listhouses()

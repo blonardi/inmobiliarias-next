@@ -6,12 +6,11 @@ import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 
 export async function generateMetadata ({ params: { permalink } }: { params: { permalink: string } }) {
-  const response = await fetch(`http://localhost:3001/api/houses/${permalink}`)
-  console.log({ response })
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`)
-  }
-  const house = await response.json()
+  const house = await apiHouses.fetchHouse(permalink)
+  //if (!response.ok) {
+  //  throw new Error(`HTTP error! Status: ${response.status}`)
+  //}
+  //const house = await response.json()
 
   return {
     title: `${house.title} - ${house.realEstate}`,

@@ -2,9 +2,11 @@
 import apiHouses from '@/api'
 import { Suspense } from 'react'
 import EditHouse from './EditHouse/EditHouse'
+import { House } from '@/types'
 
-export default async function page({ params: { permalink } }: { params: { permalink: string } }){
-	const house = await apiHouses.fetchHouse(permalink)
+
+export default async function page({ params: { permalink } }: { params: { permalink: House['permalink'] } }){
+	const house = await apiHouses.getHouse(permalink)
 
 	return <>
 			<div className='bg-slate-400 h-screen'>

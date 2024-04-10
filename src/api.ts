@@ -1,12 +1,13 @@
 import axios from "axios"
 import { FormValues, House } from "./types"
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.API_URL_PRODUCTION : process.env.API_URL_LOCAL;
 
 
 const apiHouses = {
 
   // si tira error, check {houses:[{}]}
   listhouses: async (): Promise<House[]> => {
-    const response = await fetch('http://localhost:3001/api/houses', { cache: 'no-store' })
+    const response = await fetch(`${baseUrl}/houses`, { cache: 'no-store' })
     const dataHouses = await response.json()
 		if (!dataHouses) {
       throw new Error(`Error al traer las casas.`)
@@ -15,7 +16,7 @@ const apiHouses = {
   },
 
 	getHousesFiltered: async(location: House['location'], type: House['type'], realEstate: House['realEstate']): Promise<House[]> => {
-		const response = await fetch('http://localhost:3001/api/houses', { cache: 'no-store' })
+		const response = await fetch(`${baseUrl}/houses`, { cache: 'no-store' })
 		const data = await response.json()
 		if (!location && !type && !realEstate) {
 			return data;
@@ -34,7 +35,7 @@ const apiHouses = {
 
   // permalink, parametro,
   fetchHouse: async (permalink: House['permalink']): Promise<House> => {
-    const response = await fetch(`http://localhost:3001/api/houses/${permalink}`, {cache: 'no-store'})
+    const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
     const house = await response.json()
 
     if (!house) {
@@ -53,7 +54,7 @@ const apiHouses = {
   //},
 
 	postHouse: async (newHouseData: FormValues): Promise<House> => {
-    //const response = await fetch('http://localhost:3001/api/houses', {
+    //const response = await fetch(`${baseUrl}/houses`, {
     //  method: 'POST',
     //  headers: {
     //    'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ const apiHouses = {
     //const createdHouse: House = await response.json();
     //return createdHouse;
 		console.log(typeof(newHouseData.price))
-		const apiUrl = 'http://localhost:3001/api/houses'
+		const apiUrl = `${baseUrl}/houses`
 		try {
 			const response = await axios.post(
 				apiUrl, newHouseData)
@@ -82,7 +83,7 @@ const apiHouses = {
 
 	getLocations: async() => {
 		try {
-			const response = await fetch('http://localhost:3001/api/houses/locations', { cache: 'no-store' })
+			const response = await fetch(`${baseUrl}/houses/locations`, { cache: 'no-store' })
 			if (!response.ok) {
 				throw new Error('Error en la solicitud');
 			}
@@ -100,7 +101,7 @@ const apiHouses = {
 
 	getTypesEstate: async() => {
 		try {
-			const response = await fetch('http:localhost:3001/api/houses/typesestate', { cache: 'no-store' })
+			const response = await fetch(`${baseUrl}/houses/typesestate`, { cache: 'no-store' })
 			if(!response.ok){
 				throw new Error('Error en la solicitud')
 			}
@@ -117,7 +118,7 @@ const apiHouses = {
 
 	getRealEstates: async() => {
 		try {
-			const response = await fetch('http://localhost:3001/api/houses/realestates', { cache: 'no-store' })
+			const response = await fetch(`${baseUrl}/houses/realestates`, { cache: 'no-store' })
 			if(!response.ok){
 				throw new Error('Error en la solicitud')
 			}

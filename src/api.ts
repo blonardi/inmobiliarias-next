@@ -33,10 +33,10 @@ const apiHouses = {
 	},
 
   // permalink, parametro,
-
-	getHouse: async (permalink: House['permalink']): Promise<House> => {
+  fetchHouse: async (permalink: House['permalink']): Promise<House> => {
 		try{
 			console.log({baseUrl})
+
 			const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
 			if (!response.ok) {
 				throw new Error('Error en la solicitud');
@@ -48,9 +48,27 @@ const apiHouses = {
 			return house
 		}catch(error){
 			console.error('Error en la solicitud para conseguir una casa:', error);
-			throw new Error('Error al obtener una casa.');
+  		throw new Error('Error al obtener una casa.');
 		}
-	},
+  },
+
+	//getHouse: async (permalink: House['permalink']): Promise<House> => {
+	//	try{
+	//		console.log({baseUrl})
+	//		const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
+	//		if (!response.ok) {
+	//			throw new Error('Error en la solicitud');
+	//		}
+	//		const house = await response.json()
+	//		if (!house) {
+	//			throw new Error(`House with permalink ${permalink} not found`)
+	//		}
+	//		return house
+	//	}catch(error){
+	//		console.error('Error en la solicitud para conseguir una casa:', error);
+	//		throw new Error('Error al obtener una casa.');
+	//	}
+	//},
 
   //search: async (query: string): Promise<House[]> => {
   //  const houses = await apiHouses.listhouses()

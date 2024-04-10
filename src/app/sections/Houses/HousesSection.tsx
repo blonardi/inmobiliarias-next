@@ -12,7 +12,6 @@ interface HousesSectionProps {
 
 export default async function HousesSection({location,type,realEstate}: HousesSectionProps) {
 
-	//const houses = await getHouses()
 	const houses: House[] = await apiHouses.getHousesFiltered(location, type, realEstate)
 	//console.log(houses)
 	return (

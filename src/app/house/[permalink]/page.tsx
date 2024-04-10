@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 
 export async function generateMetadata ({ params: { permalink } }: { params: { permalink: string } }) {
-  const house = await apiHouses.getHouse(permalink)
+  const house = await apiHouses.fetchHouse(permalink)
   //if (!response.ok) {
   //  throw new Error(`HTTP error! Status: ${response.status}`)
   //}
@@ -19,7 +19,7 @@ export async function generateMetadata ({ params: { permalink } }: { params: { p
 }
 
 export default async function Details ({ params: { permalink } }: { params: { permalink: string } }) {
-  const house = await apiHouses.getHouse(permalink)
+  const house = await apiHouses.fetchHouse(permalink)
 
   return (
 		<>

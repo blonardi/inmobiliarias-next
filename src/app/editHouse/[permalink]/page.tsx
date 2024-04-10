@@ -6,7 +6,7 @@ import { House } from '@/types'
 
 
 export default async function page({ params: { permalink } }: { params: { permalink: House['permalink'] } }){
-	const house = await apiHouses.getHouse(permalink)
+	const house = await apiHouses.fetchHouse(permalink)
 
 	return <>
 			<div className='bg-slate-400 h-screen'>

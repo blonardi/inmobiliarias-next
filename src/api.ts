@@ -1,6 +1,7 @@
 import axios from "axios"
-import { FormValues, House } from "./types"
-const baseUrl = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URL : process.env.NEXT_PUBLIC_LOCAL_API_URL
+import { FormValues, House, EditFormularioValues} from "./types"
+const baseUrl = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_LOCAL_API_URL
+
 
 const apiHouses = {
 
@@ -35,7 +36,7 @@ const apiHouses = {
   // permalink, parametro,
   fetchHouse: async (permalink: House['permalink']): Promise<House> => {
 		try{
-			console.log({baseUrl})
+			//console.log({baseUrl})
 
 			const response = await fetch(`${baseUrl}/houses/${permalink}`, {cache: 'no-store'})
 			if (!response.ok) {
@@ -106,6 +107,25 @@ const apiHouses = {
 			throw error
 		}
   },
+
+	patchHouse: async (permalink: House['permalink'], data: EditFormularioValues): Promise<House> => {
+		try {
+			console.log({baseUrl})
+			const response = await axios.patch(`${baseUrl}/houses/${permalink}`, data, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			})
+			if (!response) {
+				throw new Error('Error en la solicitud de actualizacion');
+			}
+			const patchedHouse = await response.data
+			return patchedHouse
+		} catch (error) {
+			console.error('Ha ocurrido un error al actualizar la casa:', error);
+			throw new Error('Error al actualizar la casa.');
+		}
+	},
 
 	getLocations: async() => {
 		try {

@@ -24,3 +24,7 @@ export interface House {
   location: string
   realEstate: string
 }
+
+export interface EditFormularioValues extends Omit<House, 'id' | 'date' | 'permalink'> {}
+
+export interface EditFormularioProps extends Omit<House, 'id' | 'date'> {}

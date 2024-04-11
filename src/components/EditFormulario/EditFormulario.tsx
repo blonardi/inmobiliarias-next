@@ -5,22 +5,9 @@ import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
-import { House } from '@/types' 
+import apiHouses from '@/api'
+import { EditFormularioProps, EditFormularioValues} from '@/types' 
 
-interface EditFormularioProps extends Omit<House, 'id' | 'date'>{}
-
-interface EditFormularioValues {
-	price: House['price'],
-	title: House['title'],
-	address: House['address'],
-	description: House['description'],
-	dimention: House['dimention'],
-	type: House['type'],
-	location: House['location'],
-	realEstate: House['realEstate'],
-	houseImage: House['houseImage']
-
-}
 
 export default function EditFormulario({ permalink, price, title, address, description, dimention, type, location, realEstate, houseImage }: EditFormularioProps) {
 	const [dataForm, setDataForm] = useState<EditFormularioValues>({
@@ -46,26 +33,24 @@ export default function EditFormulario({ permalink, price, title, address, descr
 			[name]: value
 		}))
 	}
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		//console.log(e)
 		try {
-			const res = await fetch(`http://localhost:3001/api/houses/${permalink}`, {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(dataForm)
-			})
-			if (!res) {
-				throw new Error('Failed to update House')
+			const patchedHouse = await apiHouses.patchHouse(permalink, dataForm);
+			if(patchedHouse){
+				router.refresh();
+				router.push('/');
+			}else {
+				console.error('Error al traer patchedHouse');
 			}
-			router.refresh()
-			router.push('/')
 		} catch (error) {
-			console.error(`Ha ocurrido un error ${error}`)
+			console.error(`Ha ocurrido un error ${error}`);
+			// Maneja el error de forma adecuada, por ejemplo, mostrando un mensaje al usuario
 		}
 	}
+	
 	return (
 		<div className="form-container">
 			<form onSubmit={handleSubmit} className="md:max-w-xl lg:max-w-3xl mx-auto flex flex-col items-center justify-center gap-y-6 border-8 border-emerald-800 p-4 bg-slate-100 ">

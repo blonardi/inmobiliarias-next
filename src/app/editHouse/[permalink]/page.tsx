@@ -1,4 +1,3 @@
-'use client'
 import apiHouses from '@/api'
 import { Suspense } from 'react'
 import EditHouse from './EditHouse/EditHouse'

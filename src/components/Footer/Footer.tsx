@@ -3,10 +3,10 @@ import Image from 'next/image'
 
 import Link from "next/link"
 
-const Footer = () => {
+export const Footer = () => {
 	return (
 
-	<footer id="footer" className="w-full absolute bottom-0">
+	<footer id="footer" className="w-full absolute">
 	  <div className="container text-gray-400 bg-gray-900 body-font px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
 	    <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
 				<Image  width={48} height={48} src={logoKumpel} className='rounded-full' alt="Logo Kumpel" />
@@ -38,5 +38,3 @@ const Footer = () => {
 	</footer>
 )
 }
-
-export default Footer

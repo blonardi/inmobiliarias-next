@@ -128,7 +128,9 @@ body {
 
 .header {
 	background-image: url('./assets/imgs/hero-bg.png');
-	object-fit: cover;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 @layer components {

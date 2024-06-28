@@ -18,10 +18,6 @@ export default function Nav(){
 		      <Link href='#houses' className="mr-5 text-slate-500 hover:text-lime-700 hover:cursor-pointer">Inmuebles</Link>
 		      <Link href='/' className="mr-5 text-slate-500 hover:text-lime-700 hover:cursor-pointer">Nosotros</Link>
 		      <Link href='/' className="mr-5 text-slate-500 hover:text-lime-700 hover:cursor-pointer">Contacto</Link>
-
-					<button className="
-					py-2 px-4 border rounded-md text-lime-700 bg-white hover:bg-lime-700 hover:text-white
-					" disabled>Log In</button>
 				</div>
 		  </nav>
 		</>

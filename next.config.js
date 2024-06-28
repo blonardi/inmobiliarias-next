@@ -6,7 +6,7 @@ const nextConfig = {
   },
 	images: {
 		formats: ['image/avif', 'image/webp'],
-		domains: ['images.pexels.com', 'fincaraiz.com.co']
+		domains: ['images.pexels.com', 'fincaraiz.com.co', 'a0.muscache.com']
 	},
 };
 

@@ -2,13 +2,12 @@ import React from 'react'
 import type { Metadata } from 'next'
 //import { Roboto } from 'next/font/google'
 import './globals.css'
-import Footer from '@/components/Footer/Footer'
 import {Providers} from "./providers";
 // const roboto = Roboto({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Inmobiliarias Larroque',
-  description: 'Web de inmobiliarias en Larroque, Irazusta, Carbo',
+  title: 'Inmobiliarias Entre Rios',
+  description: 'Web de inmobiliarias en Entre Rios',
 	keywords: ['casas', 'terrenos','lotes','campos','larroque','carbo','irazusta']
 }
 
@@ -30,7 +29,6 @@ export default function RootLayout({
 	      <body className='min-h-screen relative bg-slate-100'>
 					<Providers>
 						<main>{children}</main>
-						<Footer/>
 					</Providers>
 				</body>
 	    </html>

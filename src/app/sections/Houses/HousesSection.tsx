@@ -16,7 +16,7 @@ export default async function HousesSection({location,type,realEstate}: HousesSe
 	//console.log(houses)
 	return (
 			<section id='houses'>
-				<div className='my-4 py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 justify-center flex-wrap'>
+				<div className='my-4 max-w-7xl mx-auto py-8 px-8 grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center flex-wrap'>
 					{houses.length > 0 ? (
 						houses.map((house) => ( 
 							<Link key={house.permalink} href={`house/${house.permalink}`}>

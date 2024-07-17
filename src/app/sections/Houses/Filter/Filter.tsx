@@ -9,7 +9,7 @@ export default async function Filter() {
 		apiHouses.getTypesEstate(),
 		apiHouses.getRealEstates()
 	]);
-
+	
 	return(
 		<section id="filter-houses">
 			<div className="lg:my-24 lg:w-2/3 my-24 md:my-48 lg:flex-col max-w-[90%] mx-auto overflow-hidden text-gray-400 bg-header body-font shadow-2xl hover:shadow-lg hover:shadow-slate-600 rounded-xl transition-all flex flex-col justify-center items-center">

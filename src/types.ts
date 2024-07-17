@@ -25,6 +25,13 @@ export interface House {
   realEstate: string
 }
 
+export interface GetHousesFilteredResponse {
+  houses: House[];
+  totalPages: number;
+  currentPage: number;
+}
+
+
 export interface EditFormularioValues extends Omit<House, 'id' | 'date' | 'permalink'> {}
 
 export interface EditFormularioProps extends Omit<House, 'id' | 'date'> {}

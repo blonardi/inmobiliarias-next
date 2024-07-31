@@ -7,7 +7,7 @@ export interface FormValues {
   type: string
   location: string
   realEstate: string
-  houseImage: string
+  houseImage: File
 }
 
 export interface House {
@@ -18,20 +18,22 @@ export interface House {
   date: string
   address: string
   description: string
-  houseImage: string
+  houseImage: FileList
   dimention: number
   type: string
   location: string
   realEstate: string
+  lat?: number // latitud, opcional
+  lon?: number // longitud, opcional
 }
 
 export interface GetHousesFilteredResponse {
-  houses: House[];
-  totalPages: number;
-  currentPage: number;
+  houses: House[]
+  totalPages: number
+  currentPage: number
 }
 
-
-export interface EditFormularioValues extends Omit<House, 'id' | 'date' | 'permalink'> {}
+export interface EditFormularioValues
+  extends Omit<House, 'id' | 'date' | 'permalink'> {}
 
 export interface EditFormularioProps extends Omit<House, 'id' | 'date'> {}

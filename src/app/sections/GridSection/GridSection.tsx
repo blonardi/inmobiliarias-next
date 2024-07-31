@@ -1,8 +1,8 @@
 import React from 'react';
-import houseImage from '@/app/assets/imgs/casa.jpg';
-import loteImage from '@/app/assets/imgs/lote.jpg';
-import terrenoImage from '@/app/assets/imgs/terreno.webp';
-import contactImage from '@/app/assets/imgs/landscape.jpg';
+import houseImage from '@/assets/imgs/casa.jpg';
+import loteImage from '@/assets/imgs/lote.jpg';
+import terrenoImage from '@/assets/imgs/terreno.webp';
+import contactImage from '@/assets/imgs/landscape.jpg';
 import { StaticImageData } from 'next/image';
 
 interface Card {

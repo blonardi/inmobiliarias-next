@@ -1,16 +1,31 @@
 'use client'
 import apiHouses from '@/api'
-import { FormValues } from '@/types'
+import { FormValues, RealEstate } from '@/types'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 //import Image from 'next/image'
 
 export default function FormPage() {
 	const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>();
 	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+	const [realEstates, setRealEstates] = useState<RealEstate[]>([]);
 	const router = useRouter();
+
+	useEffect(() => {
+		const fetchRealEstates = async () => {
+			try {
+				const data = await apiHouses.getFromRealEstates();
+				setRealEstates(data);
+			} catch (error) {
+				console.error('Error al obtener inmobiliarias:', error);
+			}
+		};
+
+		fetchRealEstates();
+	}, []);
+
 
 	const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -31,9 +46,9 @@ export default function FormPage() {
 			}
 		});
 
-		for (const [key, value] of formData.entries()) {
-			console.log(`${key}:`, value);
-		}
+		//for (const [key, value] of formData.entries()) {
+		//	console.log(`${key}:`, value);
+		//}
 
 
 		try {
@@ -131,16 +146,15 @@ export default function FormPage() {
 					</label>
 					<label htmlFor='realEstate' className='flex flex-col my-2 text-white w-1/3'>
 						Inmobiliaria
-						<select
-							id='realEstate'
-							className='py-3 px-6 text-md font-bold bg-slate-300 text-black'
-							{...register('realEstate', { required: true })}
-						>
-							<option value="default" disabled>Elige la inmobiliaria..</option>
-							<option value='Perera'>Perera</option>
-							<option value='Korell'>Korell</option>
-							<option value='Zapata'>Zapata</option>
+						<select {...register("realEstate", { required: true })}>
+							<option value="">Selecciona una inmobiliaria</option>
+							{realEstates.map((realEstate) => (
+								<option key={realEstate._id} value={realEstate.name}>
+									{realEstate.name}
+								</option>
+							))}
 						</select>
+						{errors.realEstate && <span>Este campo es requerido</span>}
 					</label>
 					<label htmlFor='type' className='flex flex-col my-2 text-white w-1/3'>
 						Tipo:

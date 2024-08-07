@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { House, EditFormularioValues } from './types'
+import { House, EditFormularioValues, RealEstate } from './types'
 const baseUrl =
   process.env.NODE_ENV === 'production'
     ? process.env.NEXT_PUBLIC_API_URL
     : process.env.NEXT_LOCAL_API_URL
 
-interface PaginationParams {
-  page: number
-  itemsPerPage: number
-}
+//interface PaginationParams {
+//  page: number
+//  itemsPerPage: number
+//}
 
 interface Property {
   permalink: string
@@ -23,14 +23,22 @@ interface Property {
 const ITEMS_PER_PAGE = 8
 const apiHouses = {
   // si tira error, check {houses:[{}]}
-  //listhouses: async (): Promise<House[]> => {
-  //  const response = await fetch(`${baseUrl}/houses`, { cache: 'no-store' })
-  //  const dataHouses = await response.json()
-  //	if (!dataHouses) {
-  //    throw new Error(`Error al traer las casas.`)
-  //  }
-  //  return dataHouses
-  //},
+  listhouses: async (): Promise<House[]> => {
+    try {
+      const response = await fetch(`${baseUrl}/houses`, { cache: 'no-store' })
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const dataHouses = await response.json()
+      if (!Array.isArray(dataHouses)) {
+        throw new Error(`La respuesta no es un array de casas.`)
+      }
+      return dataHouses
+    } catch (error) {
+      console.error('Error al obtener las casas:', error)
+      return [] // Devuelve un array vacío en caso de error
+    }
+  },
 
   //getHousesFiltered: async(location: House['location'], type: House['type'], realEstate: House['realEstate']): Promise<House[]> => {
   //	const response = await fetch(`${baseUrl}/houses`, { cache: 'no-store' })
@@ -199,6 +207,7 @@ const apiHouses = {
 
   postHouse: async (newHouseData: FormData): Promise<House> => {
     try {
+      console.log({ newHouseData })
       const response = await axios.post(
         `http://localhost:3002/api/houses`,
         newHouseData,
@@ -290,12 +299,44 @@ const apiHouses = {
       }
       const realEstate = await response.json()
       if (!Array.isArray(realEstate) || realEstate.length === 0) {
-        throw new Error('Error al obtener tipos de terrenos')
+        throw new Error('Error al obtener real estate names')
       }
       return realEstate
     } catch (error) {
       console.error('Error en la solicitud:', error)
       throw new Error('Error al obtener real estate names')
+    }
+  },
+
+  getFromRealEstates: async (): Promise<RealEstate[]> => {
+    try {
+      const response = await fetch(`http://localhost:3002/api/realestates`, {
+        cache: 'no-store'
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+
+      if (!Array.isArray(data)) {
+        throw new Error('La respuesta no es un array de inmobiliarias')
+      }
+
+      return data
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error al obtener inmobiliarias:', error.message)
+      } else {
+        console.error('Error desconocido al obtener inmobiliarias')
+      }
+
+      // Dependiendo de tus necesidades, puedes optar por devolver un array vacío
+      // return [];
+
+      // O re-lanzar el error para que sea manejado por el componente que llama a esta función
+      throw new Error('No se pudieron obtener las inmobiliarias')
     }
   },
 

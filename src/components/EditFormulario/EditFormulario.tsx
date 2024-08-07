@@ -1,138 +1,101 @@
 'use client'
 import React, { useState, ChangeEvent } from 'react'
-//import './Form.css'
+import { useForm, Controller } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem, SelectLabel } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import apiHouses from '@/api'
-import { EditFormularioProps, EditFormularioValues} from '@/types' 
-
+import { EditFormularioProps, EditFormularioValues } from '@/types'
 
 export default function EditFormulario({ permalink, price, title, address, description, dimention, type, location, realEstate, houseImage }: EditFormularioProps) {
-	const [dataForm, setDataForm] = useState<EditFormularioValues>({
-		price,
-	  title,
-	  address,
-	  description,
-	  dimention,
-	  type,
-	  location,
-	  realEstate,
-	  houseImage
-	})
-	//console.log(dataForm.realEstate)
+	const { register, handleSubmit, control, setValue } = useForm<EditFormularioValues>({
+		defaultValues: {
+			price,
+			title,
+			address,
+			description,
+			dimention,
+			type,
+			location,
+			realEstate,
+			houseImage
+		}
+	});
+	const [selectedFile, setSelectedFile] = useState<File | null>(null); // Estado para el archivo seleccionado
+	const [imagePreview, setImagePreview] = useState<string | null>(houseImage !== 'undefined' ? houseImage : ''); // Estado para la vista previa de la imagen
 
-	const router = useRouter()
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		console.log("evento", e)
-		const { name, value } = e.currentTarget
-		console.log(name, value)
-		setDataForm(prevState => ({
-			...prevState,
-			[name]: value
-		}))
-	}
+	const router = useRouter();
 
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		//console.log(e)
+	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0]; // Obtiene el archivo seleccionado
+		if (file) {
+			setSelectedFile(file); // Actualiza el estado selectedFile
+			setImagePreview(URL.createObjectURL(file)); // Actualiza la vista previa de la imagen
+			setValue('houseImage', file); // Almacena el archivo en react-hook-form
+		}
+	};
+
+	const onSubmit = async (data: EditFormularioValues) => {
+		const formData = new FormData();
+		for (const key in data) {
+			formData.append(key, data[key]);
+		}
+
+		if (selectedFile) {
+			formData.append('houseImage', selectedFile); // Agrega el archivo al formData
+		}
+
 		try {
-			const patchedHouse = await apiHouses.patchHouse(permalink, dataForm);
-			if(patchedHouse){
+			const patchedHouse = await apiHouses.patchHouse(permalink, formData);
+			if (patchedHouse) {
 				router.refresh();
 				router.push('/');
-			}else {
+			} else {
 				console.error('Error al traer patchedHouse');
 			}
 		} catch (error) {
 			console.error(`Ha ocurrido un error ${error}`);
-			// Maneja el error de forma adecuada, por ejemplo, mostrando un mensaje al usuario
 		}
-	}
-	
+	};
+
 	return (
 		<div className="form-container">
-			<form onSubmit={handleSubmit} className="md:max-w-xl lg:max-w-3xl mx-auto flex flex-col items-center justify-center gap-y-6 border-8 border-emerald-800 p-4 bg-slate-100 ">
-
+			<form onSubmit={handleSubmit(onSubmit)} className="md:max-w-xl lg:max-w-3xl mx-auto flex flex-col items-center justify-center gap-y-6 border-8 border-emerald-800 p-4 bg-slate-100 ">
 				<h2 className='font-semibold text-2xl'>Edicion de Casa</h2>
 
 				<div className='grid lg:grid-cols-2 gap-y-2'>
 					<div className='w-full group min-h-[300px] h-full'>
 						<label htmlFor='housePrice'>
 							<Input size={16}
-								onChange={handleChange}
-								value={dataForm.price}
+								{...register('price')}
 								type='number'
-								name='price'
 								placeholder='Precio casa'
 								id='housePrice'
 							/>
 						</label>
 						<label htmlFor='houseTitle'>
 							<Input size={16}
-								onChange={handleChange}
-								defaultValue={dataForm.title}
+								{...register('title')}
 								type='text'
-								name='title'
 								placeholder='Titulo de la casa'
 								id='houseTitle'
-								//classNames={{
-								//	label: ["text-slate-900", "font-semibold"],
-								//	input: [
-								//		"bg-transparent",
-								//		"text-black/90 dark:text-white/90",
-								//		"placeholder:text-default-700/50",
-								//	],
-								//	inputWrapper: [
-								//		"bg-slate-300"
-								//	],
-								//	//innerWrapper: "bg-slate-400",
-								//}}
 							/>
 						</label>
 						<label htmlFor='houseAddress'>
 							<Input size={16}
-								onChange={handleChange}
-								value={dataForm.address}
+								{...register('address')}
 								type='text'
-								name='address'
 								placeholder='Direccion'
 								id='houseAddress'
-								//classNames={{
-								//	label: ["text-slate-900", "font-semibold"],
-								//	input: [
-								//		"bg-transparent",
-								//		"text-black/90 dark:text-white/90",
-								//		"placeholder:text-default-700/50",
-								//	],
-								//	inputWrapper: [
-								//		"bg-slate-300"
-								//	],
-								//	//innerWrapper: "bg-slate-400",
-								//}}
 							/>
 						</label>
 						<label htmlFor='houseDescription'>
 							<Input size={16}
-								onChange={handleChange}
-								value={dataForm.description}
+								{...register('description')}
 								type='textarea'
-								name='description'
 								placeholder='Descripcion'
 								id='houseDescription'
-								//classNames={{
-								//	label: ["text-slate-900", "font-semibold"],
-								//	input: [
-								//		"bg-transparent",
-								//		"text-black/90 dark:text-white/90",
-								//		"placeholder:text-default-700/50",
-								//	],
-								//	inputWrapper: [
-								//		"bg-slate-300"
-								//	],
-								//	//innerWrapper: "bg-slate-400",
-								//}}
 							/>
 						</label>
 					</div>
@@ -140,109 +103,93 @@ export default function EditFormulario({ permalink, price, title, address, descr
 					<div className='w-full group'>
 						<label htmlFor='houseDimention'>
 							<Input
-							 	size={16}
-								//variant='flat'
-								//label='Dimension'
-								onChange={handleChange}
-								value={dataForm.dimention}
+								size={16}
+								{...register('dimention')}
 								type='number'
-								name='dimention'
 								placeholder='Dimension'
 								id='houseDimention'
-								//className={{
-								//	label: ["text-slate-900", "font-semibold"],
-								//	input: [
-								//		"bg-transparent",
-								//		"text-black/90 dark:text-white/90",
-								//		"placeholder:text-default-700/50",
-								//	],
-								//	inputWrapper: [
-								//		"bg-slate-300"
-								//	],
-								//	//innerWrapper: "bg-slate-400",
-								//}}
 							/>
 						</label>
 						<label htmlFor='houseType'>
-							<Select
-								onValueChange={(newType) => setDataForm({ ...dataForm, type: newType })}
-								//value={dataForm.type}  // Valor actual del estado
-								defaultValue={dataForm.type.toString()}  // Valor por defecto (igual al actual)
-								name='type'
-								data-te-select-init data-te-select-visible-options="3"
-								//className="rounded-md  text-black text-lg border-r-16 w-full"
-
-							>
-								<SelectTrigger className="w-full bg-red">
-									<SelectValue placeholder="Tipo" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										<SelectLabel>Tipo</SelectLabel>
-										<SelectItem key='Lote' value='Lote'>
-											Lote
-										</SelectItem>
-										<SelectItem key='Casa' value='Casa'>
-											Casa
-										</SelectItem>
-										<SelectItem key='Terreno' value='Terreno'>
-											Terreno
-										</SelectItem>
-									</SelectGroup>
-								</SelectContent>
-							</Select>
+							<Controller
+								name="type"
+								control={control}
+								render={({ field }) => (
+									<Select {...field}>
+										<SelectTrigger className="w-full bg-red">
+											<SelectValue placeholder="Tipo" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectLabel>Tipo</SelectLabel>
+												<SelectItem key='Lote' value='Lote'>Lote</SelectItem>
+												<SelectItem key='Casa' value='Casa'>Casa</SelectItem>
+												<SelectItem key='Terreno' value='Terreno'>Terreno</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+								)}
+							/>
 						</label>
 						<label htmlFor='houseLocation'>
-							<Select
-								onValueChange={(newLocation) => setDataForm({ ...dataForm, location: newLocation })}
-								//value={dataForm.location}
-								defaultValue={dataForm.location.toString()}
-								name='location'
-								data-te-select-init data-te-select-visible-options="3"
-							>
-								<SelectTrigger className="w-full bg-red">
-									<SelectValue placeholder="Ciudad" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										<SelectLabel>Ciudad</SelectLabel>
-										<SelectItem key='Larroque' value='Larroque'>Larroque</SelectItem>
-										<SelectItem key='Irazusta' value='Irazusta'>Irazusta</SelectItem>
-										<SelectItem key='Talitas' value='Talitas'>Talitas</SelectItem>
-										<SelectItem key='Carbo' value='Carbo'>Carbo</SelectItem>
-										<SelectItem key='Cuchilla' value='Cuchilla'>Cuchilla</SelectItem>
-									</SelectGroup>
-								</SelectContent>
-							</Select>
+							<Controller
+								name="location"
+								control={control}
+								render={({ field }) => (
+									<Select {...field}>
+										<SelectTrigger className="w-full bg-red">
+											<SelectValue placeholder="Ciudad" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectLabel>Ciudad</SelectLabel>
+												<SelectItem key='Larroque' value='Larroque'>Larroque</SelectItem>
+												<SelectItem key='Irazusta' value='Irazusta'>Irazusta</SelectItem>
+												<SelectItem key='Talitas' value='Talitas'>Talitas</SelectItem>
+												<SelectItem key='Carbo' value='Carbo'>Carbo</SelectItem>
+												<SelectItem key='Cuchilla' value='Cuchilla'>Cuchilla</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+								)}
+							/>
 						</label>
 						<label htmlFor="houseRealEstate">
-							<Select
-								onValueChange={(newRealEstate) => setDataForm({ ...dataForm, realEstate: newRealEstate })}
-								//value={dataForm.realEstate}
-								defaultValue={dataForm.realEstate.toString()}
-								name='realEstate'
-								data-te-select-init data-te-select-visible-options="3"
-								//className="rounded-md text-black font-semibold text-lg border-r-16 w-64"
-							>
-								<SelectTrigger className="w-full bg-red">
-									<SelectValue placeholder="Inmobiliaria" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										<SelectLabel>Inmobiliaria</SelectLabel>
-										<SelectItem key='Perera' value='Perera'>Perera</SelectItem>
-										<SelectItem key='Korell' value='Korell'>Korell</SelectItem>
-										<SelectItem key='Zapata' value='Zapata'>Zapata</SelectItem>
-									</SelectGroup>
-								</SelectContent>
-							</Select>
+							<Controller
+								name="realEstate"
+								control={control}
+								render={({ field }) => (
+									<Select {...field}>
+										<SelectTrigger className="w-full bg-red">
+											<SelectValue placeholder="Inmobiliaria" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectLabel>Inmobiliaria</SelectLabel>
+												<SelectItem key='Perera' value='Perera'>Perera</SelectItem>
+												<SelectItem key='Korell' value='Korell'>Korell</SelectItem>
+												<SelectItem key='Zapata' value='Zapata'>Zapata</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+								)}
+							/>
 						</label>
+						<label htmlFor='houseImage'>
+							<Input
+								type='file'
+								name='houseImage'
+								onChange={handleImageChange}
+								id='houseImage'
+								className='w-full'
+							/>
+						</label>
+						{imagePreview && (
+							<div className='mt-2'>
+								<Image src={imagePreview} alt="Preview" className='max-w-full h-auto' />
+							</div>
+						)}
 					</div>
-					<Input 
-						//variant='flat'
-						onChange={handleChange}
-						//label="Imagen"							
-						value={dataForm.houseImage} type='text' name='houseImage' placeholder='Url de imagen' className='w-full' />
 				</div>
 				<Button className='border-lime-800 text-lime-800 hover:bg-lime-800 hover:text-white transition duration-300 ease-in-out block p-2 bg-gray/20' variant="outline" type="submit">Actualizar</Button>
 			</form>

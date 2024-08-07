@@ -18,13 +18,21 @@ export interface House {
   date: string
   address: string
   description: string
-  houseImage: FileList
+  houseImage: File
   dimention: number
   type: string
   location: string
   realEstate: string
   lat?: number // latitud, opcional
   lon?: number // longitud, opcional
+}
+
+export interface RealEstate {
+  _id?: string // MongoDB ObjectId, opcional porque puede no estar presente antes de guardar
+  name: string
+  address: string
+  phone?: string // opcional porque no es required en el schema
+  email?: string // opcional porque no es required en el schema
 }
 
 export interface GetHousesFilteredResponse {

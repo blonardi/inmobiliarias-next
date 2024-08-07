@@ -46,9 +46,9 @@ export default function HomePage({ searchParams }: PageProps) {
 				/>
 			</Suspense>
 
-			{/*<GridSection />*/}
-			{/*<ContactForm />*/}
-			{/*<Footer />*/}
+			{/*<GridSection />
+			<ContactForm />
+			<Footer />*/}
 		</>
 	);
 }

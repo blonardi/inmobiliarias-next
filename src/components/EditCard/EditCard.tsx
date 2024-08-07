@@ -6,21 +6,24 @@ import RemoveBtn from '@/components/RemoveBtn/RemoveButton'
 import { HiPencilAlt } from 'react-icons/hi'
 import { House } from "@/types";
 
-interface EditCardProps extends Omit <House, 'id' | 'date' | 'dimention' | 'type' | 'location'
-| 'realEstate'> {}
+interface EditCardProps extends Omit<House, 'id' | 'date' | 'dimention' | 'type' | 'location'
+	| 'realEstate' | 'lat' | 'lon'> { }
 
 export default function EditCard({ permalink, houseImage, title, price, address, description }: EditCardProps) {
+	console.log({ houseImage })
 	return (
 		<Card key={permalink} className="md:min-w-[600px] max-w-[400px]">
 			<CardHeader className="flex justify-between">
 				<section className="flex gap-3">
-					<Image
-						alt={`Imagen de casa ${title}`}
-						height={100}
-						radius="md"
-						src={houseImage}
-						width={100}
-					/>
+					{houseImage && (
+						<Image
+							alt={`Imagen de casa ${title}`}
+							height={100}
+							width={100}
+							src={typeof houseImage === 'string' ? houseImage : URL.createObjectURL(houseImage)}
+							className="rounded-md"
+						/>
+					)}
 					<div className="flex flex-col">
 						<p className="text-md">Nombre: {title}</p>
 						<p className="text-small text-default-500">Precio: {price}</p>
